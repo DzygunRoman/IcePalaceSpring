@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="Layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form action="#" th:action="@{/UpdateCategory}" th:object="${category}" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="categoryName" class="control-label">Название категории</label>
+                <input type="text" th:field="*{categoryName}" id="categoryName" placeholder="Название категории" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="categoryDescription" class="control-label">Описание</label>
+                <input type="text" th:field="*{categoryDescription}" id="categoryDescription" placeholder="Описание" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Slug" class="control-label">Описание</label>
+                <input type="text" th:field="*{Slug}" id="Slug" placeholder="Слаг" class="form-control">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Изменить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
