@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="Layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div layout:fragment="content">
+    <div th:switch="${products}" >
+        <h2 th:case="null">Продукты не созданы</h2>
+        <p><a href="CreateProduct">Создать</a></p>
+        <div th:case="*">
+            <h2>Список услуг</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Название категории</th>
+                    <th>Услуга</th>
+                    <th>Цена</th>
+                    <th>Фото</th>
+                    <th>Слаг</th>
+                    <th>Описание</th>
+                    <th>Доступность</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.category.categoryName}"></td>
+                    <td th:text="${product.Name}"></td>
+                    <td th:text="${product.price}"></td>
+
+                    <td th:text="${product.Slug}"></td>
+                    <td th:text="${product.Description}"></td>
+                    <td th:text="${product.available}"></td>
+                    <td><a th:href="@{UpdateProduct/{id}(id=${product.id})}">Изменить</a> </td>
+                    <td><a th:href="@{DeleteProduct/{id}(id=${product.id})}">Удалить</a> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

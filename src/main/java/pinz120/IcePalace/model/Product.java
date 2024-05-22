@@ -2,10 +2,7 @@ package pinz120.IcePalace.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.util.Objects;
 
 @NoArgsConstructor
 @Data
@@ -23,8 +20,18 @@ public class Product {
     private String Description;
     private Boolean available;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Product(Long id, String name, Integer price, String photo, String slug, String description, Boolean available, Category category) {
+        this.id = id;
+        Name = name;
+        this.price = price;
+        Photo = photo;
+        Slug = slug;
+        Description = description;
+        this.available = available;
+        this.category = category;
+    }
 }

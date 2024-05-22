@@ -1,13 +1,13 @@
 package pinz120.IcePalace.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pinz120.IcePalace.model.Category;
 import pinz120.IcePalace.repository.CategoryRepository;
-import pinz120.IcePalace.services.CategoryService;
-
+import pinz120.IcePalace.sevice.CategoryService;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,10 +20,9 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-
     @GetMapping("/IndexCategory")
-    public String findAllCategories(Model model){
-        List<Category> categories = categoryService.findAll();
+    public String findAll(Model model){
+        List<Category> categories = (List<Category>) categoryService.findAll();
         model.addAttribute("categories", categories);
         return "IndexCategory";
     }
@@ -33,7 +32,7 @@ public class CategoryController {
     }
     @PostMapping("/CreateCategory")
     public String createCategory(Category category){
-         categoryService.saveCategory(category);
+        categoryService.createCategory(category);
         return "redirect:/IndexCategory";
     }
     @GetMapping("/DeleteCategory/{id}")
@@ -42,14 +41,16 @@ public class CategoryController {
         return "redirect:/IndexCategory";
     }
     @GetMapping("/UpdateCategory/{id}")
-    public String updateCategoryForm(@PathVariable("id") Long id, Model model){
-        Category category = categoryService.findById(id);
-        model.addAttribute("category", category);
-        return "/UpdateCategory";
+    public String updateCategoryForm(@PathVariable("id") Long id, Model model ){
+        Optional<Category> category = categoryService.findById(id);
+        model.addAttribute("category",category);
+        return "UpdateCategory";
     }
-    @PostMapping("/UpdateCategory")
+    @PostMapping("/UpdateCategory/{id}")
     public String updateCategory(Category category){
-        categoryService.saveCategory(category);
+        categoryService.createCategory(category);
         return "redirect:/IndexCategory";
     }
 }
+
+

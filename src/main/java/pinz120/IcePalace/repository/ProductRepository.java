@@ -1,8 +1,11 @@
 package pinz120.IcePalace.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
+import pinz120.IcePalace.model.Category;
 import pinz120.IcePalace.model.Product;
-@Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+
+import java.util.List;
+
+public interface ProductRepository extends CrudRepository<Product, Long> {
+
 }

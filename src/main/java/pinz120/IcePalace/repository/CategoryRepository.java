@@ -8,6 +8,5 @@ import pinz120.IcePalace.model.Category;
 import java.util.Optional;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
-
+public interface CategoryRepository extends CrudRepository<Category, Long> {
 }
