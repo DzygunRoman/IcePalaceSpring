@@ -46,7 +46,7 @@ public class CategoryController {
         model.addAttribute("category",category);
         return "UpdateCategory";
     }
-    @PostMapping("/UpdateCategory/{id}")
+    @PostMapping("/UpdateCategory")
     public String updateCategory(Category category){
         categoryService.createCategory(category);
         return "redirect:/IndexCategory";
