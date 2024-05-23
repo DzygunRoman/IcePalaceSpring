@@ -1,6 +1,7 @@
 package pinz120.IcePalace.controller;
 
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,21 @@ public class ProductController {
         this.categoryService = categoryService;
         this.productService = productService;
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/IndexProduct")
     public String findAll(Model model){
         List<Product> products = (List<Product>) productService.findAll();
         model.addAttribute("products", products);
         return "IndexProduct";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/CreateProduct")
     public String createProductForm( Model model){
         model.addAttribute("categories", productService.getAllCategories());
         model.addAttribute("product", new Product());
         return "CreateProduct";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/CreateProduct")
     public String createProduct(Product product, @RequestParam("file") MultipartFile file) throws IOException {
         Path resourceDirectory =  Paths.get("src","main", "resources", "static", "images");
@@ -53,11 +57,13 @@ public class ProductController {
         productService.createProduct(product);
         return "redirect:/IndexProduct";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/DeleteProduct/{id}")
     public String deleteProduct(@PathVariable("id") Long id){
         productService.deleteById(id);
         return "redirect:/IndexProduct";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/UpdateProduct/{id}")
     public String updateProductForm(@PathVariable("id") Long id, Model model){
         Optional<Product> product = productService.findById(id);
@@ -65,6 +71,7 @@ public class ProductController {
         model.addAttribute("product", new Product());
         return "UpdateProduct";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/UpdateProduct")
     public String updateProduct(Product product, @RequestParam("file") MultipartFile file) throws IOException{
         Path resourceDirectory =  Paths.get("src","main", "resources", "static", "images");

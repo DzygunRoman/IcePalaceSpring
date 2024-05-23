@@ -1,6 +1,7 @@
 package pinz120.IcePalace.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,32 +20,38 @@ public class ScheduleController {
     public ScheduleController(ScheduleService scheduleService) {
         this.scheduleService = scheduleService;
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/IndexSchedule")
     public String findAll(Model model){
         List<Schedule> schedules = (List<Schedule>) scheduleService.findAll();
         model.addAttribute("schedules", schedules);
         return "IndexSchedule";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/CreateSchedule")
     public String createScheduleForm(Schedule schedule){
         return "CreateSchedule";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/CreateSchedule")
     public String createSchedule(Schedule schedule){
         scheduleService.createSchedule(schedule);
         return "redirect:/IndexSchedule";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/DeleteSchedule/{id}")
     public String deleteSchedule(@PathVariable("id") Long id){
         scheduleService.deleteById(id);
         return "redirect:/IndexSchedule";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/UpdateSchedule/{id}")
     public String updateScheduleForm(@PathVariable("id") Long id, Model model){
         Optional<Schedule> schedule = scheduleService.findById(id);
         model.addAttribute("schedule", schedule);
         return "UpdateSchedule";
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/UpdateSchedule")
     public String updateSchedule(Schedule schedule){
         scheduleService.createSchedule(schedule);

@@ -20,5 +20,4 @@ public class Schedule {
      private String treName;
      @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
      private LocalDateTime DateTime;
-
 }
