@@ -1,4 +1,4 @@
-package pinz120.IcePalace.sevice;
+package pinz120.IcePalace.service;
 
 import org.springframework.stereotype.Service;
 import pinz120.IcePalace.model.Category;

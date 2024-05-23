@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="Layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
 
+<body>
+<div layout:fragment="content">
+    <h1>Изменить</h1>
+    <h4>Услугу</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form action="#" th:action="@{/UpdateProduct}" th:object="${product}" enctype="multipart/form-data" method="post">
+                <div class="form-group">
+                    <label for="Name" class="control-label">Услуга</label>
+                    <input type="text" th:field="*{Name}" id="Name" placeholder="Название услуги" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="control-label">Цена</label>
+                    <input type="text" th:field="*{price}" id="price" placeholder="Цена" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="Slug" class="control-label">Слаг</label>
+                    <input type="text" th:field="*{Slug}" id="Slug" placeholder="Слаг" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="Description" class="control-label">Описание</label>
+                    <input type="text" th:field="*{Description}" id="Description" placeholder="Описание" class="form-control"/>
+                </div>
+                <div class="form-group form-check">
+                    <label for="available"  class="form-check-label">Доступность
+                        <input type="checkbox" th:field="*{available}" id="available" placeholder="Доступность" class="form-check-input"/>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="mt-4">
+                        <input type="file" name="file"   class="form-control" /><br>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select th:field="*{category}" class ="form-control" title="Категория" >
+                        <option th:each="category : ${categories}" th:value="${category.id}">[[${category.categoryName}]]</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Изменить" class="btn btn-primary"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
