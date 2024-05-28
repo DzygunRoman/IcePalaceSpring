@@ -33,10 +33,10 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="ShedulesUser" asp-action="Index">Расписание мероприятий</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="UserProducts" asp-action="Index">Услуги</a>
+                    <a class="nav-link text-dark" th:href="@{UserProduct}">Услуги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Cart" asp-action="GetUserCart">Корзина</a>
+                    <a class="nav-link text-dark" th:href="@{Cart}">Корзина</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="UserOrders">Заказ</a>

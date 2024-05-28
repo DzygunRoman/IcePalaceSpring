@@ -6,7 +6,7 @@
 <div layout:fragment="content">
 <div th:switch="${categories}" >
     <h2 th:case="null">Категории не созданы</h2>
-    <p><a href="CreateCategory">Создать</a></p>
+    <p><a href="/CreateCategory">Создать</a></p>
     <div th:case="*">
         <h2>Категории</h2>
         <table class="table">

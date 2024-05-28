@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
+
 @Data
 @Entity
 @Table(name="Products")
@@ -19,22 +19,14 @@ public class Product {
     private String Slug;
     private String Description;
     private Boolean available;
-
+    private Integer Quantity;
+    private Integer Summa;
+    private Integer GrandSum;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(mappedBy = "OrderDetail")
-    private OrderDetail orderDetail;
+    public Product(Long id, String Name){this.id = id;}
 
-    public Product(Long id, String name, Integer price, String photo, String slug, String description, Boolean available, Category category) {
-        this.id = id;
-        Name = name;
-        this.price = price;
-        Photo = photo;
-        Slug = slug;
-        Description = description;
-        this.available = available;
-        this.category = category;
-    }
+    public Product(){}
 }

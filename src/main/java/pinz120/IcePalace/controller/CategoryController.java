@@ -5,6 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import pinz120.IcePalace.model.Category;
 import pinz120.IcePalace.service.CategoryService;
 
@@ -45,14 +46,17 @@ public class CategoryController {
     }
 
     @GetMapping("/UpdateCategory/{id}")
-    public String updateCategoryForm(@PathVariable("id") Long id, Model model ){
+    public String updateCategoryForm( @PathVariable("id") Long id, Model model ){
         Optional<Category> category = categoryService.findById(id);
-        model.addAttribute("category",category);
+        if(category.isEmpty()){
+            return "redirect:/UpdateCategory";
+        }
+        model.addAttribute("category",category.get());
         return "UpdateCategory";
     }
 
     @PostMapping("/UpdateCategory")
-    public String updateCategory(Category category){
+    public String updateCategory(@ModelAttribute Category category){
         categoryService.createCategory(category);
         return "redirect:/IndexCategory";
     }

@@ -1,13 +1,15 @@
 package pinz120.IcePalace.controller;
 
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
+import pinz120.IcePalace.model.Cart;
 import pinz120.IcePalace.model.Product;
 import pinz120.IcePalace.service.CategoryService;
 import pinz120.IcePalace.service.ProductService;
@@ -17,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

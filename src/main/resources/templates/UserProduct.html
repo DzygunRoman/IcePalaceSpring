@@ -17,7 +17,7 @@
             <p th:text="${product.Name}" class="card-text"><b>Название: </b></p>
             <p th:text="${product.price}" class="card-text"><b>Цена: </b></p>
             <p th:text="${product.Description}" class="card-text"><b>Описание: </b></p>
-            <button type="button" onclick="add(@item.ProductID)" class="btn btn-primary">Добавить в корзину</button>
+            <a class="btn btn-primary" th:href="@{'/buy/' + ${product.id}}" >Добавить в корзину</a>
         </div>
     </div>
 </div>
@@ -28,22 +28,4 @@
 </div>
 </body>
 </html>
-@section Scripts {
-<script>
-    async function add(ProductID) {
-        var usernameEl = document.getElementById("user");
-        try {
-            var response = await fetch(`/Cart/AddItem?ProductID=${ProductID}`);
-            if (response.status == 200) {
-                var result = await response.json();
-                var cartCountEl = document.getElementById("cartCount");
-                cartCountEl.innerHTML = result;
-                window.location.href = "#cartCount";
-            }
-        }
-        catch (err) {
-            console.log(err);
-        }
-    }
-</script>
-}
+

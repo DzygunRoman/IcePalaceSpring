@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="Layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div layout:fragment="content">
+<div style="width:90%;margin:auto" class="mt-2">
+    <h5>Моя корзина</h5>
+
+    <table class="table table-striped">
+        <tr>
+            <th>Услуги</th>
+            <th>Фото</th>
+            <th>Категория</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Сумма</th>
+            <th>Действие</th>
+        </tr>
+
+        <tr th:each="item : ${carts}">
+            <td th:text="${item.product.Name}"></td>
+            <td> <img th:if="${item.product.Photo != null}" th:src="@{'/images/' + ${item.product.Photo}}" width="100">
+            <td th:text="${item.product.category.categoryName}"></td>
+            <td th:text="${item.product.price}"></td>
+            <td th:text="${item.Quantity}"></td>
+            <td th:text="${item.TotalSum}">
+
+            <!--<td th:text="${item.product.price * item.Quantity}">-->
+            <td>
+                <a class="btn btn-info" th:href="@{'/addItem/' + ${item.product.id}}">+</a>
+                <a class="btn btn-info" th:href="@{'/remove/' + ${item.product.id}}">-</a>
+            </td>
+        </tr>
+
+        <tr th:each="item : ${carts}">
+            <td th:text="${item.GrandSum}">
+        </tr>
+    </table>
+
+
+
+    <div class="my-2">
+        <a class="btn btn-primary" href="/Cart/Checkout">Оплатить</a>
+    </div>
+</div>
+</div>
+</body>
+</html>

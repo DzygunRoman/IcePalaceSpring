@@ -36,4 +36,7 @@ public class ProductService {
     public Optional<Category>  getCategory(Long id){
         return categoryRepository.findById(id);
     }
+    public boolean existById(Long id){
+        return productRepository.existsById(id);
+    }
 }
