@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="Layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div layout:fragment="content">
+    <div th:switch="${products}" >
+        <h2 th:case="null">Продукты не созданы</h2>
+        <div th:case="*">
+            <h2>Список услуг</h2>
+<div class="w-100 d-flex flex-wrap">
+
+    <div th:each="product : ${products}">
+    <div class="card mx-3 mt-4 mb-4" style="width: 16rem;">
+        <img th:if="${product.Photo != null}" th:src="@{'/images/' + ${product.Photo}}" style="width:100%"  width="100" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p th:text="${product.category.categoryName}" class="card-text"><b>Категория: </b></p>
+            <p th:text="${product.Name}" class="card-text"><b>Название: </b></p>
+            <p th:text="${product.price}" class="card-text"><b>Цена: </b></p>
+            <p th:text="${product.Description}" class="card-text"><b>Описание: </b></p>
+            <button type="button" onclick="add(@item.ProductID)" class="btn btn-primary">Добавить в корзину</button>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
+@section Scripts {
+<script>
+    async function add(ProductID) {
+        var usernameEl = document.getElementById("user");
+        try {
+            var response = await fetch(`/Cart/AddItem?ProductID=${ProductID}`);
+            if (response.status == 200) {
+                var result = await response.json();
+                var cartCountEl = document.getElementById("cartCount");
+                cartCountEl.innerHTML = result;
+                window.location.href = "#cartCount";
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+</script>
+}

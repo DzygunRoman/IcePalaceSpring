@@ -12,7 +12,7 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String UserId = "1";
+    private String UserId = "User";
     private boolean IdDeleted = false;
 
     @OneToMany(mappedBy = "CartDetails")

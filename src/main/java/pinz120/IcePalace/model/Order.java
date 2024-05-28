@@ -18,7 +18,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//Стратегия формирования ID
     @Column(name = "id")
     private Long id;
-    private String UserId = "1";
+    private String UserId = "User";
 
     private boolean IsDeleted = false;
     private String Email;
