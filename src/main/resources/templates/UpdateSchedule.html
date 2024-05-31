@@ -8,6 +8,7 @@
   <div class="row">
     <div class="col-md-4">
       <form action="#" th:action="@{/UpdateSchedule}" th:object="${schedule}" method="post">
+        <input type="hidden" th:field="*{id}"/>
         <div class="form-group">
           <label for="scheduleName" class="control-label">Название мероприятия</label>
           <input type="text" th:field="*{scheduleName}" id="scheduleName" placeholder="Название мероприятия" class="form-control">

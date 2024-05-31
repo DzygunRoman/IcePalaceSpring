@@ -26,11 +26,7 @@
                     <a class="nav-link text-dark" th:href="@{IndexSchedule}">Расписание</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="OrdersAdmin" asp-action="Index">Заказы</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="ShedulesUser" asp-action="Index">Расписание мероприятий</a>
+                    <a class="nav-link text-dark" th:href="@{IndexOrder}">Cписок заказов</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" th:href="@{UserProduct}">Услуги</a>
@@ -38,14 +34,6 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" th:href="@{Cart}">Корзина</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="UserOrders">Заказ</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index"></a>
-                </li>
-
 
             </ul>
             <partial name="_LoginPartial"></partial>

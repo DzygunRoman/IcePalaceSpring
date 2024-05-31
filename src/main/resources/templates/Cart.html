@@ -5,7 +5,6 @@
 <div layout:fragment="content">
 <div style="width:90%;margin:auto" class="mt-2">
     <h5>Моя корзина</h5>
-
     <table class="table table-striped">
         <tr>
             <th>Услуги</th>
@@ -16,7 +15,6 @@
             <th>Сумма</th>
             <th>Действие</th>
         </tr>
-
         <tr th:each="item : ${carts}">
             <td th:text="${item.product.Name}"></td>
             <td> <img th:if="${item.product.Photo != null}" th:src="@{'/images/' + ${item.product.Photo}}" width="100">
@@ -24,23 +22,15 @@
             <td th:text="${item.product.price}"></td>
             <td th:text="${item.Quantity}"></td>
             <td th:text="${item.TotalSum}">
-
-            <!--<td th:text="${item.product.price * item.Quantity}">-->
             <td>
                 <a class="btn btn-info" th:href="@{'/addItem/' + ${item.product.id}}">+</a>
                 <a class="btn btn-info" th:href="@{'/remove/' + ${item.product.id}}">-</a>
             </td>
         </tr>
-
-        <tr th:each="item : ${carts}">
-            <td th:text="${item.GrandSum}">
-        </tr>
     </table>
-
-
-
+    <h2>Сумма:<div th:text="${carts.get(carts.size()-1).GrandSum}"></div></h2>
     <div class="my-2">
-        <a class="btn btn-primary" href="/Cart/Checkout">Оплатить</a>
+        <a class="btn btn-primary" th:href="@{'\Checkout'}">Оплатить</a>
     </div>
 </div>
 </div>

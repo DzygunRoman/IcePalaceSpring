@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout " layout:decorate="Layout"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+
+<body>
+<div layout:fragment="content">
+            <h2>Расписание</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Название мероприятия</th>
+                    <th>Тренер</th>
+                    <th>Время проведения</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="schedule : ${schedules}">
+                    <td th:text="${schedule.scheduleName}"></td>
+                    <td th:text="${schedule.treName}"></td>
+                    <td th:text="${#temporals.format(schedule.DateTime, 'yyyy-MM-dd HH:mm')}"></td>
+                </tr>
+                </tbody>
+            </table>
+    <h3>Оформление заказа</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <form action="#" th:action="@{/Checkout}" th:object="${orderDTO}" method="post">
+
+                    <div class="form-group">
+                        <label for="Email" class="control-label">Тренер</label>
+                        <input type="text" th:field="*{Email}" id="Email" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="DateTime" class="control-label">Описание</label>
+                        <input type="datetime-local" th:field="*{DateTime}" id="DateTime" placeholder="Время проведения" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Подтвердить заказ" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

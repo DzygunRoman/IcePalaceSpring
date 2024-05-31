@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pinz120.IcePalace.model.Cart;
 import pinz120.IcePalace.model.Product;
+import pinz120.IcePalace.model.Schedule;
 import pinz120.IcePalace.service.ProductService;
 
 import java.util.ArrayList;
@@ -34,7 +35,6 @@ public class UserProductController {
         }
         Integer TotalSum = 0;
         if(session.getAttribute("cart") == null){
-
             List<Cart> cart = new ArrayList<Cart>();
             cart.add(new Cart(products.get(),1,products.get().getPrice(),products.get().getSumma(),products.get().getGrandSum()));
             session.setAttribute("cart",cart);
@@ -43,7 +43,6 @@ public class UserProductController {
             int index = this.exists(id, cart);
             if (index == -1) {
                 cart.add(new Cart(products.get(),1,products.get().getPrice(),products.get().getSumma(),products.get().getGrandSum()));
-
             }else{
                 if(cart.get(index).getTotalSum() == null){
                     cart.get(index).setTotalSum(0);
@@ -51,17 +50,15 @@ public class UserProductController {
                 if(cart.get(index).getGrandSum() == null){
                     cart.get(index).setGrandSum(0);
                 }
-
                 cart.get(index).setQuantity(cart.get(index).Quantity+1);
                 cart.get(index).setTotalSum(products.get().getPrice()*cart.get(index).Quantity);
-               // for(Cart item : cart){
-              //      item.setGrandSum(item.getTotalSum() + item.getGrandSum());
-              //  }
-
-
+                int x = 0;
+                for(Cart item : cart){
+                    x += item.getTotalSum();
+                    item.setGrandSum(x);
+                }
             }
             model.addAttribute("cart",cart);
-
         }
         return "redirect:/UserProduct";
     }
@@ -84,14 +81,14 @@ public class UserProductController {
             int quint=carts.get(index).Quantity;
             int sum=carts.get(index).TotalSum - carts.get(index).Price;
             int quantity = quint - 1;
+            int grandTotal = carts.get(carts.size()-1).GrandSum - carts.get(index).Price;
             carts.get(index).setQuantity(quantity);
             carts.get(index).setTotalSum(sum);
+            carts.get(carts.size()-1).setGrandSum(grandTotal);
         }
-
         model.addAttribute("carts", carts);
         return "redirect:/Cart";
     }
-
     @GetMapping("/addItem/{id}")
     public String addItem(@PathVariable("id") Long id, Model model, HttpSession session){
         List<Cart> carts = (List<Cart>) session.getAttribute("cart");
@@ -99,16 +96,17 @@ public class UserProductController {
         int quint=carts.get(index).Quantity;
         int sum = carts.get(index).TotalSum + carts.get(index).Price;
         int quantity = quint + 1;
+        int grandTotal = carts.get(carts.size()-1).GrandSum + carts.get(index).Price;
         carts.get(index).setQuantity(quantity);
         carts.get(index).setTotalSum(sum);
+        carts.get(carts.size()-1).setGrandSum(grandTotal);
         model.addAttribute("carts", carts);
         return "redirect:/Cart";
     }
-
     @GetMapping(value="/Cart")
     public String index(Model model,HttpSession session) {
         if (session.getAttribute("cart") == null) {
-            return "redirect:/Cart";
+            return "/CartEmpty";
         } else {
             List<Cart> carts = (List<Cart>) session.getAttribute("cart");
             model.addAttribute("carts", carts);

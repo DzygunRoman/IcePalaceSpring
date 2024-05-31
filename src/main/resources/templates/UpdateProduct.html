@@ -10,6 +10,7 @@
     <div class="row">
         <div class="col-md-4">
             <form action="#" th:action="@{/UpdateProduct}" th:object="${product}" enctype="multipart/form-data" method="post">
+                <input type="hidden" th:field="*{id}"/>
                 <div class="form-group">
                     <label for="Name" class="control-label">Услуга</label>
                     <input type="text" th:field="*{Name}" id="Name" placeholder="Название услуги" class="form-control"/>

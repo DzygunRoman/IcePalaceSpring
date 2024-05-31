@@ -17,7 +17,7 @@ public class Cart {
     public Integer Price;
     public Integer TotalSum;
     public Integer GrandSum;
-
+    public Integer ProductId;
     public Cart(pinz120.IcePalace.model.Product product, int quantity, Integer price, Integer totalSum, Integer grandSum) {
         Product = product;
         Quantity = quantity;

@@ -22,10 +22,12 @@ public class Product {
     private Integer Quantity;
     private Integer Summa;
     private Integer GrandSum;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
-
+   // @OneToOne(mappedBy = "product", cascade = CascadeType.ALL,optional = false, fetch = FetchType.EAGER)
+  //  private OrderDetail orderDetail;
     public Product(Long id, String Name){this.id = id;}
 
     public Product(){}
